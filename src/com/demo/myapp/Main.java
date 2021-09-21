@@ -1,124 +1,57 @@
 package com.demo.myapp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {       //zkratka psvm
-        System.out.println("HELLO HELL");
+    public static void main(String[] args) {
 
+        Scanner sc = new Scanner(System.in);
+        System.out.println("vyberte polozky");
+        ArrayList<ArrayList<String>> sortiment = new ArrayList<ArrayList<String>>();
 
-        Scanner sc=new Scanner(System.in);
+        for (int i = 0; i < 10; i++) {
+            ArrayList<String> o = new ArrayList<String>();
 
-        boolean run =true;
-        //int rum=1;
-        while (run){
-
-
-        System.out.println("zadej cislo a");
-        double a=Integer.parseInt(sc.nextLine());
-
-        System.out.println("zadej cislo b");
-        double b=Integer.parseInt(sc.nextLine());
-        double result;
-
-        System.out.println("zadej matematickou operaci +; -; /; *; " );
-        String mathop=sc.next();
-
-        if(mathop.equals("+")){
-            result=a+b;
-            System.out.println(a+" + "+b+" = "+result);
-        }else if(mathop.equals("-")){
-            result=a-b;
-            System.out.println(a+" - "+b+" = "+result);
-        }else if(mathop.equals("*")){
-            result=a*b;
-            System.out.println(a+" * "+b+" = "+result);
-        }
-        else if(mathop.equals("*")){
-            result=a/b;
-            System.out.println(a+" / "+b+" = "+result);
+            o.add("" + i);
+            o.add("produkt " + i);
+            o.add("" + (i + 5) * 5);
+            sortiment.add(o);
         }
 
-        System.out.println("dalsi zadani ano/ne");
-        String conf=sc.nextLine();
-
-        if(conf.equals("ne")){
-            run=false;
+        System.out.println("Zbozi:");
+        for (int j = 0; j < sortiment.size(); j++) {
+            ArrayList<String> radek = sortiment.get(j);
+            String msg = "ID " + radek.get(0) + " / zbozi - " + radek.get(1) + " / cena" + radek.get(2) + " kč";
+            System.out.println(msg);
         }
 
-        }
+        ArrayList<ArrayList<String>> kosik = new ArrayList<ArrayList<String>>();
+        int x = 0;
+        while (x == 0) {
+            System.out.println("Pro vlozeni zbozi do kosiku, zadejte ID:");
+            int zadaneId = sc.nextInt();
+            kosik.add(sortiment.get(zadaneId));
+            int celkCena = 0;
+            if (zadaneId == -1) {
+                System.out.println("ukončuji nákup");
+                sortiment.clear();
+                kosik.clear();
+                x = zadaneId;
 
-        /*
-
-        AND &&
-
-        0 0 - 0
-        1 0 - 0
-        0 1 - 0
-        1 1 - 1
-
-        OR ||
-
-        0 0 - 0
-        1 0 - 1
-        0 1 - 1
-        1 1 - 1
+            } else {
 
 
-         */
-
-       /*
-   firstFor:
-        for (int i = 0; i < 21; i++) {
-         secondFor:
-            for (int j = 0; j < 21; j++) {
-                if(j==5){
-                    break firstFor;
+                for (int k = 0; k < kosik.size(); k++) {
+                    ArrayList<String> radek = sortiment.get(k);
+                    celkCena = celkCena + Integer.parseInt(radek.get(2));
                 }
-                System.out.println(j);
-
+                System.out.println("celkova cena zbozi v kosiku: " + celkCena + " kč");
+                System.out.println("pro ukonceni nakupu zadejte -1");
             }
 
-            for (int j = 0; j < 21; j++) {
-                if(i==5){
-                    continue;
-                }
-                System.out.println(i);
-            }
-
-            */
-        /*
-        boolean isValid =false;
-
-        do {
-            System.out.println("ahoj");
-        } while (isValid);
-
-        } // do While bez ohledu na podminku se cyklus provede minimalne jednou
-
-
-
-        int[] array = {1,2,3,4,5,6};
-
-        System.out.println(array[3]); //vypsani ctvrteho cisla
-        array[4]=250; //prepsani hodnoty v poli
-        System.out.println(Arrays.toString(array)); // vypsani pole
-        System.out.println(Arrays.sort(array);); // serazeni pole pole
-
-        array (int i : array){
-            System.out.println(i);
         }
-
-        for (int index = 0; index < array.length ; index++) {
-            System.out.println(array[index]);
-        }
-
-*/
-
-
-
     }
-
 }
